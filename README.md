@@ -71,8 +71,8 @@ This project is a comprehensive skeleton for building modern SaaS applications w
 
 1. Clone repository
    ```bash
-   git clone https://github.com/your-organization/nextjs15-skeleton.git
-   cd nextjs15-skeleton
+   git clone https://github.com/dikahariss/nextjs-skeleton.git
+   cd nextjs-skeleton
    ```
 2. Install dependencies
    ```bash
@@ -229,5 +229,5 @@ MIT License. See [LICENSE](./LICENSE) for details.
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
 - [Vitest Documentation](https://vitest.dev/guide/)
 - [Playwright Documentation](https://playwright.dev/docs/intro)
-- [GitHub Discussions](https://github.com/your-organization/nextjs15-skeleton/discussions)
+- [GitHub Discussions](https://github.com/dikahariss/nextjs-skeleton/discussions)
 - [Join our Discord](https://discord.gg/your-invite-link)

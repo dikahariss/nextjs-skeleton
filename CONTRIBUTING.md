@@ -30,6 +30,6 @@ Terima kasih telah tertarik untuk berkontribusi pada proyek ini!
 
 ## Komunikasi
 
-- Gunakan [GitHub Discussions](https://github.com/your-organization/nextjs15-skeleton/discussions) untuk bertanya atau berdiskusi.
+- Gunakan [GitHub Discussions](https://github.com/dikahariss/nextjs-skeleton/discussions) untuk bertanya atau berdiskusi.
 
 Terima kasih atas kontribusinya!
