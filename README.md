@@ -191,14 +191,14 @@ Kami sangat terbuka untuk kontribusi! Silakan baca [CONTRIBUTING.md](./CONTRIBUT
 
 - [ ] Auth & Authorization module
 - [ ] Database & ORM integration
-- [ ] Payment gateway
+- [ ] API layer & data fetching
 - [ ] Admin dashboard
 - [ ] Design system & UI components
-- [ ] API layer & data fetching
-- [ ] Analytics & monitoring
-- [ ] Internationalization (i18n)
+- [ ] Payment gateway
 - [ ] Advanced caching
+- [ ] Analytics & monitoring
 - [ ] SEO tools
+- [ ] Internationalization (i18n)
 
 ---
 
