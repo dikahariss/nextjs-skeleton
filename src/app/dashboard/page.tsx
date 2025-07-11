@@ -1,84 +1,113 @@
 import React from "react";
-import { SignedIn, SignedOut, SignInButton, UserButton, SignOutButton } from "@clerk/nextjs";
-import Image from "next/image";
+import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
+import { Button } from "@/components/ui/button";
+import { MainCard } from "@/components/MainCard";
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
+import { AppHeader } from "@/components/AppHeader";
+import { AppFooter } from "@/components/AppFooter";
+import Link from "next/link";
+
+const dashboardHeadline = "Selamat Datang di Dashboard";
+const dashboardDescription =
+  "Kelola data, user, dan fitur SaaS Anda secara efisien. Dashboard ini memberikan akses ke statistik, integrasi, dan pengaturan akun Anda.";
+const illustration = "/window.svg";
+const dashboardListItems = [
+  "Statistik & analitik aplikasi",
+  "Manajemen user & profil",
+  "Integrasi API & data bisnis",
+  "Pengaturan akun dan keamanan",
+];
 
 export default function DashboardPage() {
   return (
-    <>
-      <SignedIn>
-        <div className="min-h-screen flex flex-col bg-gradient-to-br from-white to-blue-50">
-          <header className="w-full flex justify-between items-center px-8 py-6 border-b border-gray-200">
-            <div className="flex items-center gap-2">
-              <Image src="/next.svg" alt="Next.js logo" width={40} height={40} />
-              <span className="text-xl font-bold tracking-tight text-gray-800">Dashboard</span>
-            </div>
-            <div className="flex items-center gap-4">
-              <UserButton />
-              <SignOutButton redirectUrl="/">
-                <button
-                  className="rounded bg-gray-200 text-black px-4 py-2 font-semibold hover:bg-gray-300 transition"
-                  aria-label="Logout dari aplikasi"
-                >
-                  Logout
-                </button>
-              </SignOutButton>
-            </div>
-          </header>
-          <main className="flex-1 flex flex-col items-center justify-center text-center px-4">
-            <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-4">
-              Selamat Datang di Dashboard
-            </h1>
-            <p className="text-lg text-gray-600 mb-8 max-w-xl">
-              Anda berhasil login! Ini adalah area privat aplikasi SaaS Anda. Silakan kembangkan
-              fitur sesuai kebutuhan bisnis Anda.
-            </p>
-            <div className="mt-8 flex flex-col gap-4 w-full max-w-md">
-              <div className="rounded-lg bg-white shadow p-6 text-left border border-gray-100">
-                <h2 className="text-xl font-bold mb-2">Contoh Fitur</h2>
-                <ul className="list-disc list-inside text-gray-700 text-base">
-                  <li>Manajemen user & profil</li>
-                  <li>Integrasi API & data</li>
-                  <li>Statistik & analitik</li>
-                  <li>Pengaturan akun</li>
-                </ul>
-              </div>
-            </div>
-          </main>
-          <footer className="w-full text-center py-6 text-gray-400 text-sm border-t border-gray-100">
-            &copy; {new Date().getFullYear()} Dika Haris Abdurahman. Powered by Next.js & Clerk.
-          </footer>
-        </div>
-      </SignedIn>
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-blue-50 to-white">
       <SignedOut>
-        <div className="min-h-screen flex flex-col bg-gradient-to-br from-white to-blue-50">
-          <header className="w-full flex justify-between items-center px-8 py-6 border-b border-gray-200">
-            <div className="flex items-center gap-2">
-              <Image src="/next.svg" alt="Next.js logo" width={40} height={40} />
-              <span className="text-xl font-bold tracking-tight text-gray-800">Dashboard</span>
-            </div>
-          </header>
-          <main className="flex-1 flex flex-col items-center justify-center text-center px-4">
-            <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              Akses Dashboard Memerlukan Login
-            </h1>
-            <p className="text-base text-gray-600 mb-8 max-w-md">
-              Silakan login untuk mengakses fitur premium, keamanan data, dan pengalaman penuh
-              aplikasi SaaS ini.
-            </p>
+        <AppHeader title="Dashboard" showHome={true} homeHref="/" />
+        <MainCard
+          headline={dashboardHeadline}
+          description={dashboardDescription}
+          illustration={illustration}
+          showList={true}
+          listItems={dashboardListItems}
+          action={
             <SignInButton mode="modal" forceRedirectUrl="/dashboard">
-              <button
-                className="rounded bg-blue-600 text-white px-6 py-3 font-semibold text-lg shadow hover:bg-blue-700 transition"
-                aria-label="Login ke dashboard"
+              <Button
+                size="lg"
+                className="w-full max-w-xs mx-auto flex items-center justify-center gap-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold shadow-lg hover:shadow-xl hover:scale-105 hover:from-blue-700 hover:to-blue-800 transition-all duration-200"
+                aria-label="Login ke aplikasi"
               >
-                Login untuk Akses Dashboard
-              </button>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="2"
+                  stroke="currentColor"
+                  className="w-5 h-5"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6A2.25 2.25 0 005.25 5.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15"
+                  />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M18 12l3-3m0 0l-3-3m3 3H9"
+                  />
+                </svg>
+                Login dengan Akun
+              </Button>
             </SignInButton>
-          </main>
-          <footer className="w-full text-center py-6 text-gray-400 text-sm border-t border-gray-100">
-            &copy; {new Date().getFullYear()} Dika Haris Abdurahman. Powered by Next.js & Clerk.
-          </footer>
+          }
+        />
+        <div className="px-4 sm:px-6 pb-8">
+          <Alert className="w-full max-w-lg mx-auto shadow-md" variant="default">
+            <AlertTitle className="text-base font-semibold">📊 Dashboard Info</AlertTitle>
+            <AlertDescription className="text-sm leading-relaxed">
+              Dashboard UI sudah menggunakan <strong>shadcn-ui</strong> dan mobile-first. Akses
+              fitur SaaS Anda dengan mudah!
+            </AlertDescription>
+          </Alert>
         </div>
+        <AppFooter />
       </SignedOut>
-    </>
+      <SignedIn>
+        <AppHeader
+          title="Dashboard"
+          showHome={true}
+          homeHref="/"
+          showUser={true}
+          showLogout={true}
+        />
+        <MainCard
+          headline={dashboardHeadline}
+          description={dashboardDescription}
+          illustration={illustration}
+          showList={true}
+          listItems={dashboardListItems}
+          action={
+            <Link href="/">
+              <Button
+                size="lg"
+                className="w-full max-w-xs mx-auto font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
+                variant="outline"
+              >
+                Ke Beranda
+              </Button>
+            </Link>
+          }
+        />
+        <div className="px-4 sm:px-6 pb-8">
+          <Alert className="w-full max-w-lg mx-auto shadow-md" variant="default">
+            <AlertTitle className="text-base font-semibold">📊 Dashboard Info</AlertTitle>
+            <AlertDescription className="text-sm leading-relaxed">
+              Dashboard UI sudah menggunakan <strong>shadcn-ui</strong> dan mobile-first. Akses
+              fitur SaaS Anda dengan mudah!
+            </AlertDescription>
+          </Alert>
+        </div>
+        <AppFooter />
+      </SignedIn>
+    </div>
   );
 }

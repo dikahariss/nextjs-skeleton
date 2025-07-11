@@ -1,59 +1,112 @@
 import React from "react";
-import Image from "next/image";
-import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
+import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
+import { Button } from "@/components/ui/button";
+import { MainCard } from "@/components/MainCard";
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
+import { AppHeader } from "@/components/AppHeader";
+import { AppFooter } from "@/components/AppFooter";
+import Link from "next/link";
+
+const headline = "Selamat Datang di SaaS Skeleton";
+const description =
+  "Bangun aplikasi SaaS modern dengan Next.js 15, Clerk Auth, dan arsitektur modular. Nikmati fitur premium gratis untuk pengembangan lebih cepat dan efisien.";
+const illustration = "/globe.svg";
+const listItems = [
+  "Manajemen user & profil",
+  "Integrasi API & data",
+  "Statistik & analitik",
+  "Pengaturan akun",
+];
 
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-blue-50 to-white">
-      <header className="w-full flex justify-between items-center px-8 py-6 border-b border-gray-200">
-        <div className="flex items-center gap-2">
-          <Image src="/next.svg" alt="Next.js logo" width={40} height={40} />
-          <span className="text-xl font-bold tracking-tight text-gray-800">
-            Next.js SaaS Skeleton
-          </span>
+      <SignedOut>
+        <AppHeader title="Next.js SaaS Skeleton" showDashboard={true} dashboardHref="/dashboard" />
+        <MainCard
+          headline={headline}
+          description={description}
+          illustration={illustration}
+          showList={true}
+          listItems={listItems}
+          action={
+            <SignInButton mode="modal" forceRedirectUrl="/dashboard">
+              <Button
+                size="lg"
+                className="w-full max-w-xs mx-auto flex items-center justify-center gap-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold shadow-lg hover:shadow-xl hover:scale-105 hover:from-blue-700 hover:to-blue-800 transition-all duration-200"
+                aria-label="Login ke aplikasi"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="2"
+                  stroke="currentColor"
+                  className="w-5 h-5"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6A2.25 2.25 0 005.25 5.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15"
+                  />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M18 12l3-3m0 0l-3-3m3 3H9"
+                  />
+                </svg>
+                Login dengan Akun
+              </Button>
+            </SignInButton>
+          }
+        />
+        <div className="px-4 sm:px-6 pb-8">
+          <Alert className="w-full max-w-lg mx-auto shadow-md" variant="default">
+            <AlertTitle className="text-base font-semibold">💡 Info</AlertTitle>
+            <AlertDescription className="text-sm leading-relaxed">
+              UI sudah menggunakan <strong>shadcn-ui</strong> dan mobile-first. Nikmati fitur
+              premium gratis untuk pengembangan SaaS Anda!
+            </AlertDescription>
+          </Alert>
         </div>
-        <SignedIn>
-          <div className="flex items-center gap-4">
-            <UserButton />
-            <a
-              href="/dashboard"
-              className="rounded bg-blue-600 text-white px-4 py-2 font-semibold hover:bg-blue-700 transition"
-            >
-              Dashboard
-            </a>
-          </div>
-        </SignedIn>
-      </header>
-      <main className="flex-1 flex flex-col items-center justify-center text-center px-4">
-        <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-4">
-          Selamat Datang di SaaS Skeleton
-        </h1>
-        <p className="text-lg text-gray-600 mb-8 max-w-xl">
-          Kerangka kerja modern untuk membangun aplikasi SaaS dengan Next.js 15, Clerk Auth, dan
-          arsitektur modular siap pakai.
-        </p>
-        <SignedOut>
-          <SignInButton mode="modal" forceRedirectUrl="/dashboard">
-            <button
-              className="rounded bg-blue-600 text-white px-6 py-3 font-semibold text-lg shadow hover:bg-blue-700 transition"
-              aria-label="Login ke aplikasi"
-            >
-              Login
-            </button>
-          </SignInButton>
-        </SignedOut>
-        <SignedIn>
-          <a
-            href="/dashboard"
-            className="rounded bg-blue-600 text-white px-6 py-3 font-semibold text-lg shadow hover:bg-blue-700 transition"
-          >
-            Ke Dashboard
-          </a>
-        </SignedIn>
-      </main>
-      <footer className="w-full text-center py-6 text-gray-400 text-sm border-t border-gray-100">
-        &copy; {new Date().getFullYear()} Dika Haris Abdurahman. Powered by Next.js & Clerk.
-      </footer>
+        <AppFooter />
+      </SignedOut>
+      <SignedIn>
+        <AppHeader
+          title="Next.js SaaS Skeleton"
+          showDashboard={true}
+          dashboardHref="/dashboard"
+          showUser={true}
+        />
+        <MainCard
+          headline={headline}
+          description={description}
+          illustration={illustration}
+          showList={true}
+          listItems={listItems}
+          action={
+            <Link href="/dashboard">
+              <Button
+                size="lg"
+                className="w-full max-w-xs mx-auto font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
+                variant="default"
+              >
+                Ke Dashboard
+              </Button>
+            </Link>
+          }
+        />
+        <div className="px-4 sm:px-6 pb-8">
+          <Alert className="w-full max-w-lg mx-auto shadow-md" variant="default">
+            <AlertTitle className="text-base font-semibold">💡 Info</AlertTitle>
+            <AlertDescription className="text-sm leading-relaxed">
+              UI sudah menggunakan <strong>shadcn-ui</strong> dan mobile-first. Nikmati fitur
+              premium gratis untuk pengembangan SaaS Anda!
+            </AlertDescription>
+          </Alert>
+        </div>
+        <AppFooter />
+      </SignedIn>
     </div>
   );
 }

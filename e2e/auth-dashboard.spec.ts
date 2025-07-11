@@ -3,23 +3,45 @@ import { test, expect } from "@playwright/test";
 const USERNAME = process.env.CLERK_TEST_USERNAME || "dikahariss";
 const PASSWORD = process.env.CLERK_TEST_PASSWORD || "SkeletonJuar4";
 
+async function ensureLoggedOut(page) {
+  await page.goto("/");
+  const logoutButton = await page.locator("button", { hasText: /logout/i });
+  if (await logoutButton.isVisible().catch(() => false)) {
+    await logoutButton.click();
+    await expect(page.getByText(/login dengan akun/i)).toBeVisible();
+  }
+}
+
 test("akses dashboard tanpa login harus muncul prompt login", async ({ page }) => {
+  await ensureLoggedOut(page);
   await page.goto("/dashboard");
-  await expect(
-    page.getByRole("heading", { name: /akses dashboard memerlukan login/i }),
-  ).toBeVisible();
-  await expect(page.getByRole("button", { name: /login/i })).toBeVisible();
+  await expect(page.getByText("Selamat Datang di Dashboard")).toBeVisible();
+  try {
+    await expect(page.getByText(/login dengan akun/i)).toBeVisible();
+  } catch (e) {
+    await page.screenshot({ path: "debug-dashboard-login.png", fullPage: true });
+    const html = await page.content();
+    console.log("DEBUG HTML:", html);
+    throw e;
+  }
 });
 
 test("login otomatis dengan username dan password, akses dashboard, dan logout", async ({
   page,
 }) => {
+  await ensureLoggedOut(page);
   await page.goto("/");
-  await expect(
-    page.getByRole("heading", { name: /Selamat Datang di SaaS Skeleton/i }),
-  ).toBeVisible();
-  const loginButton = page.getByRole("button", { name: /login/i });
-  await expect(loginButton).toBeVisible();
+  await expect(page.getByText("Selamat Datang di SaaS Skeleton")).toBeVisible();
+  let loginButton;
+  try {
+    loginButton = page.getByText(/login dengan akun/i);
+    await expect(loginButton).toBeVisible();
+  } catch (e) {
+    await page.screenshot({ path: "debug-home-login.png", fullPage: true });
+    const html = await page.content();
+    console.log("DEBUG HTML:", html);
+    throw e;
+  }
   await loginButton.click();
   await expect(page.getByRole("heading", { name: /sign in/i })).toBeVisible();
 
@@ -30,18 +52,20 @@ test("login otomatis dengan username dan password, akses dashboard, dan logout",
   await expect(continueButton1).toBeVisible();
   await continueButton1.click();
 
-  const passwordInput = page.locator('input[type="password"]:not([disabled])');
-  await expect(passwordInput).toBeVisible({ timeout: 10000 });
-  await expect(passwordInput).toBeEnabled({ timeout: 10000 });
+  const passwordInput = await page.locator('input[type="password"]');
+  await expect(passwordInput).toBeVisible();
   await passwordInput.fill(PASSWORD);
   const continueButton2 = page.locator(".cl-formButtonPrimary:enabled", {
-    hasText: /continue|lanjut|next|sign in|login/i,
+    hasText: /continue|lanjut|next/i,
   });
-  await expect(continueButton2).toBeVisible({ timeout: 10000 });
+  await expect(continueButton2).toBeVisible();
   await continueButton2.click();
 
-  await page.waitForURL("**/dashboard", { timeout: 15000 });
-  await expect(page.getByRole("heading", { name: /selamat datang di dashboard/i })).toBeVisible();
-  await page.getByRole("button", { name: /logout/i }).click();
-  await expect(page.getByRole("button", { name: /login/i })).toBeVisible();
+  await expect(page.getByText("Selamat Datang di Dashboard")).toBeVisible();
+  await expect(page.getByRole("button", { name: /logout/i })).toBeVisible();
+
+  const logoutButton = page.getByRole("button", { name: /logout/i });
+  await logoutButton.click();
+
+  await expect(page.getByText("Selamat Datang di SaaS Skeleton")).toBeVisible();
 });

@@ -19,45 +19,51 @@ This project is a comprehensive skeleton for building modern SaaS applications w
 
 ---
 
-## ✨ Key Features
+## ✨ Stack & Fitur Utama
 
-- **Next.js 15 App Router**: Latest routing, layouts, server components, Server Actions, Partial Prerendering
-- **React 19**: Modern React patterns, optimizations, and Server Components
-- **TypeScript**: Full type safety
-- **Tailwind CSS**: Utility-first styling
-- **Authentication (Clerk)**: Auth, protected routes
-- **Testing Suite**: Vitest (unit/integration), Playwright (E2E)
+- **Next.js 15** (App Router, Server Components, Partial Prerendering)
+- **React 19** (Modern React, Server Components)
+- **TypeScript** (Type safety menyeluruh)
+- **Tailwind CSS 4** & **shadcn-ui** (UI utility-first, komponen siap pakai)
+- **Clerk Auth** (Proteksi route, social login, email/password, middleware)
+- **Testing Modern**: Vitest (unit/integration), Playwright (E2E, login/logout, proteksi dashboard)
 - **Code Quality**: ESLint, Prettier, Husky, lint-staged
-- **Turbopack**: Fast local development
-- **Modular Structure**: Scalable folder structure for SaaS
-- **Ready for CI/CD**: Easy integration with modern pipelines
+- **Turbopack** (dev super cepat)
+- **Struktur Modular**: src/app, components/ui, lib, dsb
+- **Siap CI/CD**: Mudah diintegrasi pipeline modern
 
 ---
 
-## 📂 Project Structure
+## 📂 Struktur Project
 
 ```
-├── .github/          # GitHub workflow configurations
-├── .husky/           # Husky pre-commit hook configurations
-├── e2e/              # End-to-end tests with Playwright
-├── public/           # Static assets
+├── components.json           # Konfigurasi shadcn-ui
+├── e2e/                     # E2E test (Playwright)
+│   ├── auth-dashboard.spec.ts
+│   └── home.spec.ts
+├── public/                  # File statis (icon, gambar, dsb)
 ├── src/
-│   ├── app/          # Next.js app router pages and layouts
-│   └── __tests__/    # Unit and integration tests
-├── .eslintrc.js      # ESLint configuration
-├── .prettierrc       # Prettier configuration
-├── next.config.ts    # Next.js configuration
-├── package.json      # Project dependencies and scripts
-├── tsconfig.json     # TypeScript configuration
-└── vitest.config.ts  # Vitest configuration
+│   ├── app/                 # Halaman, layout, entry Next.js
+│   ├── components/          # Komponen utama & UI (shadcn-ui)
+│   │   ├── AppFooter.tsx
+│   │   ├── AppHeader.tsx
+│   │   ├── MainCard.tsx
+│   │   └── ui/              # Komponen UI kecil (button, card, alert, input)
+│   ├── lib/                 # Utility/helper (misal: cn)
+│   └── __tests__/           # Unit & integration test (Vitest)
+├── .husky/                  # Pre-commit hooks
+├── .eslintrc.js, .prettierrc, next.config.ts, vitest.config.ts, package.json, tsconfig.json
 ```
 
-**Penjelasan singkat:**
+**Keterangan:**
 
-- `src/app/`: Semua halaman, layout, dan komponen utama aplikasi.
-- `src/__tests__/`: Unit & integration tests.
-- `e2e/`: End-to-end tests (Playwright).
-- `public/`: File statis (gambar, favicon, dsb).
+- `src/app/` : Halaman utama, layout, entry point Next.js
+- `src/components/` : Komponen utama, reusable, dan UI shadcn
+- `src/components/ui/` : Komponen UI kecil (button, card, alert, input)
+- `src/lib/` : Utility/helper
+- `src/__tests__/` : Unit & integration test
+- `e2e/` : E2E test Playwright
+- `public/` : File statis
 
 ---
 
