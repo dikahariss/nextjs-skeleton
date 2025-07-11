@@ -25,6 +25,7 @@ This project is a comprehensive skeleton for building modern SaaS applications w
 - **React 19**: Modern React patterns, optimizations, and Server Components
 - **TypeScript**: Full type safety
 - **Tailwind CSS**: Utility-first styling
+- **Authentication (Clerk)**: Auth, protected routes
 - **Testing Suite**: Vitest (unit/integration), Playwright (E2E)
 - **Code Quality**: ESLint, Prettier, Husky, lint-staged
 - **Turbopack**: Fast local development
@@ -100,7 +101,10 @@ Contoh file `.env.example` sudah disediakan. Edit `.env.local` sesuai kebutuhan 
 ```
 NEXT_PUBLIC_API_URL=http://localhost:3000/api
 DATABASE_URL=postgres://user:password@localhost:5432/dbname
-JWT_SECRET=your_jwt_secret
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+CLERK_SECRET_KEY=your_clerk_secret_key
+CLERK_TEST_USERNAME=your_test_username
+CLERK_TEST_PASSWORD=your_test_password
 ```
 
 ---
@@ -121,6 +125,14 @@ JWT_SECRET=your_jwt_secret
 | `yarn e2e:ui`       | Run Playwright UI interactive        |
 
 ---
+
+## 🔒 Auth Module (Clerk)
+
+- Menggunakan Clerk untuk autentikasi (social login, email/password)
+- Proteksi route dashboard & API dengan middleware Clerk
+- Komponen SignedIn/SignedOut, UserButton, SignInButton, SignOutButton
+- Pengujian unit (mock Clerk context) dan e2e (login otomatis & proteksi dashboard)
+- Contoh kredensial test diatur di `.env.local` dan `.env.example`
 
 ## 🧪 Testing & Quality
 
@@ -189,7 +201,7 @@ Kami sangat terbuka untuk kontribusi! Silakan baca [CONTRIBUTING.md](./CONTRIBUT
 
 ## 🗺️ Roadmap
 
-- [ ] Auth & Authorization module
+- [x] Auth & Authorization module
 - [ ] Database & ORM integration
 - [ ] API layer & data fetching
 - [ ] Admin dashboard
