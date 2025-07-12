@@ -1,15 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-
-interface MainCardProps {
-  headline: string;
-  description: string;
-  illustration: string;
-  showList?: boolean;
-  listItems?: string[];
-  action?: React.ReactNode;
-}
+import { MainCardProps } from "@/lib/types";
 
 export function MainCard({
   headline,
@@ -18,10 +10,13 @@ export function MainCard({
   showList,
   listItems,
   action,
+  className,
 }: MainCardProps) {
   return (
     <main className="flex-1 flex flex-col items-center justify-center px-4 sm:px-6 py-8 sm:py-12">
-      <Card className="w-full max-w-lg mx-auto shadow-xl border-0 bg-white/95 backdrop-blur-md animate-fade-in">
+      <Card
+        className={`w-full max-w-lg mx-auto shadow-xl border-0 bg-white/95 backdrop-blur-md animate-fade-in ${className || ""}`}
+      >
         <CardHeader className="text-center pb-4">
           <div className="flex justify-center mb-4">
             <Image
