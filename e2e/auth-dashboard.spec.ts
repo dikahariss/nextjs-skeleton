@@ -1,9 +1,9 @@
-import { test, expect } from "@playwright/test";
+import { test, expect, type Page } from "@playwright/test";
 
 const USERNAME = process.env.CLERK_TEST_USERNAME || "dikahariss";
 const PASSWORD = process.env.CLERK_TEST_PASSWORD || "SkeletonJuar4";
 
-async function ensureLoggedOut(page) {
+async function ensureLoggedOut(page: Page) {
   await page.goto("/");
   const logoutButton = await page.locator("button", { hasText: /logout/i });
   if (await logoutButton.isVisible().catch(() => false)) {
