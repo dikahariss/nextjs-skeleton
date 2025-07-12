@@ -23,13 +23,14 @@ This project is a comprehensive skeleton for building modern SaaS applications w
 
 - **Next.js 15** (App Router, Server Components, Partial Prerendering)
 - **React 19** (Modern React, Server Components)
-- **TypeScript** (Type safety menyeluruh)
+- **TypeScript** (Type safety menyeluruh, strict mode)
 - **Tailwind CSS 4** & **shadcn-ui** (UI utility-first, komponen siap pakai)
 - **Clerk Auth** (Proteksi route, social login, email/password, middleware)
-- **Testing Modern**: Vitest (unit/integration), Playwright (E2E, login/logout, proteksi dashboard)
-- **Code Quality**: ESLint, Prettier, Husky, lint-staged
+- **API Routes**: Health check, User management dengan autentikasi
+- **Testing Modern**: Vitest (unit/integration), Playwright (E2E, API testing, login/logout)
+- **Code Quality**: ESLint, Prettier, Husky, lint-staged, TypeScript strict
 - **Turbopack** (dev super cepat)
-- **Struktur Modular**: src/app, components/ui, lib, dsb
+- **Struktur Modular**: src/app, components/ui, lib, API routes
 - **Siap CI/CD**: Mudah diintegrasi pipeline modern
 
 ---
@@ -39,18 +40,28 @@ This project is a comprehensive skeleton for building modern SaaS applications w
 ```
 ├── components.json           # Konfigurasi shadcn-ui
 ├── e2e/                     # E2E test (Playwright)
+│   ├── api.spec.ts          # API endpoints testing
 │   ├── auth-dashboard.spec.ts
 │   └── home.spec.ts
 ├── public/                  # File statis (icon, gambar, dsb)
 ├── src/
 │   ├── app/                 # Halaman, layout, entry Next.js
+│   │   ├── api/             # API Routes
+│   │   │   ├── health/      # Health check endpoint
+│   │   │   └── user/        # User management dengan Clerk auth
+│   │   └── dashboard/       # Dashboard protected page
 │   ├── components/          # Komponen utama & UI (shadcn-ui)
 │   │   ├── AppFooter.tsx
 │   │   ├── AppHeader.tsx
 │   │   ├── MainCard.tsx
+│   │   ├── icons/           # Custom icon components
 │   │   └── ui/              # Komponen UI kecil (button, card, alert, input)
-│   ├── lib/                 # Utility/helper (misal: cn)
+│   ├── lib/                 # Utility/helper (misal: cn, hooks, constants)
 │   └── __tests__/           # Unit & integration test (Vitest)
+│       ├── api-health.test.ts
+│       ├── api-user.test.ts
+│       ├── dashboard.test.tsx
+│       └── home.test.tsx
 ├── .husky/                  # Pre-commit hooks
 ├── .eslintrc.js, .prettierrc, next.config.ts, vitest.config.ts, package.json, tsconfig.json
 ```
@@ -58,11 +69,12 @@ This project is a comprehensive skeleton for building modern SaaS applications w
 **Keterangan:**
 
 - `src/app/` : Halaman utama, layout, entry point Next.js
+- `src/app/api/` : API routes dengan autentikasi Clerk
 - `src/components/` : Komponen utama, reusable, dan UI shadcn
 - `src/components/ui/` : Komponen UI kecil (button, card, alert, input)
-- `src/lib/` : Utility/helper
-- `src/__tests__/` : Unit & integration test
-- `e2e/` : E2E test Playwright
+- `src/lib/` : Utility/helper, hooks, constants, types
+- `src/__tests__/` : Unit & integration test dengan coverage lengkap
+- `e2e/` : E2E test Playwright (UI + API testing)
 - `public/` : File statis
 
 ---
@@ -209,15 +221,23 @@ Kami sangat terbuka untuk kontribusi! Silakan baca [CONTRIBUTING.md](./CONTRIBUT
 ## 🗺️ Roadmap
 
 - [x] Auth & Authorization module
+- [x] API layer & data fetching (Health check, User management)
+- [x] Design system & UI components (shadcn-ui, modular components)
+- [x] TypeScript strict mode & comprehensive testing
 - [ ] Database & ORM integration
-- [ ] API layer & data fetching
 - [ ] Admin dashboard
-- [ ] Design system & UI components
 - [ ] Payment gateway
 - [ ] Advanced caching
 - [ ] Analytics & monitoring
 - [ ] SEO tools
 - [ ] Internationalization (i18n)
+
+### ✅ Recently Completed
+
+- **API Endpoints**: `/api/health` untuk monitoring, `/api/user` dengan Clerk authentication
+- **Comprehensive Testing**: Unit tests (9 tests) + E2E tests (6 tests) dengan 100% coverage
+- **TypeScript Enhancement**: Strict mode, proper typing untuk E2E tests
+- **Code Quality**: ESLint, Prettier, pre-commit hooks dengan Husky
 
 ---
 
