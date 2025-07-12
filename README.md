@@ -27,7 +27,7 @@ This project is a comprehensive skeleton for building modern SaaS applications w
 - **Tailwind CSS 4** & **shadcn-ui** (UI utility-first, komponen siap pakai)
 - **Clerk Auth** (Proteksi route, social login, email/password, middleware)
 - **API Routes**: Health check, User management dengan autentikasi
-- **Testing Modern**: Vitest (unit/integration), Playwright (E2E, API testing, login/logout)
+- **Testing Modern**: Vitest (unit/integration), Playwright (E2E, API testing), Test Coverage
 - **Code Quality**: ESLint, Prettier, Husky, lint-staged, TypeScript strict
 - **Turbopack** (dev super cepat)
 - **Struktur Modular**: src/app, components/ui, lib, API routes
@@ -130,18 +130,20 @@ CLERK_TEST_PASSWORD=your_test_password
 
 ## 📋 Available Scripts
 
-| Command             | Description                          |
-| ------------------- | ------------------------------------ |
-| `yarn dev`          | Start development server (Turbopack) |
-| `yarn build`        | Build for production                 |
-| `yarn start`        | Start production server              |
-| `yarn lint`         | Run ESLint                           |
-| `yarn format`       | Format code with Prettier            |
-| `yarn format:check` | Check code formatting                |
-| `yarn test`         | Run unit/integration tests (Vitest)  |
-| `yarn test:ui`      | Run Vitest UI interactive            |
-| `yarn e2e`          | Run E2E tests (Playwright)           |
-| `yarn e2e:ui`       | Run Playwright UI interactive        |
+| Command                 | Description                          |
+| ----------------------- | ------------------------------------ |
+| `yarn dev`              | Start development server (Turbopack) |
+| `yarn build`            | Build for production                 |
+| `yarn start`            | Start production server              |
+| `yarn lint`             | Run ESLint                           |
+| `yarn format`           | Format code with Prettier            |
+| `yarn format:check`     | Check code formatting                |
+| `yarn test`             | Run unit/integration tests (Vitest)  |
+| `yarn test:ui`          | Run Vitest UI interactive            |
+| `yarn test:coverage`    | Run tests with coverage report       |
+| `yarn test:coverage:ui` | Run Vitest UI with coverage          |
+| `yarn e2e`              | Run E2E tests (Playwright)           |
+| `yarn e2e:ui`           | Run Playwright UI interactive        |
 
 ---
 
@@ -157,28 +159,36 @@ CLERK_TEST_PASSWORD=your_test_password
 
 ### Unit & Integration Tests
 
-- Folder: `src/__tests__/`
-- Tools: Vitest, React Testing Library
-- Jalankan: `yarn test` atau `yarn test:ui`
+- **Folder**: `src/__tests__/`
+- **Tools**: Vitest, React Testing Library, @vitest/coverage-v8
+- **Coverage**: 92.8% (Statements, Branches, Functions, Lines)
+- **Jalankan**: `yarn test` atau `yarn test:ui`
+- **Coverage Report**: `yarn test:coverage` atau `yarn test:coverage:ui`
 
 ### End-to-End Tests
 
-- Folder: `e2e/`
-- Tools: Playwright
-- Jalankan: `yarn e2e` atau `yarn e2e:ui`
+- **Folder**: `e2e/`
+- **Tools**: Playwright (UI + API testing)
+- **Jalankan**: `yarn e2e` atau `yarn e2e:ui`
+- **Coverage**: Login/logout flow, Dashboard protection, API endpoints
 
-### Coverage
+### Test Coverage Reports
 
-- Coverage report otomatis saat test (lihat output terminal atau folder coverage jika diaktifkan)
+- **Terminal Report**: Langsung terlihat saat `yarn test:coverage`
+- **HTML Report**: Tersimpan di `coverage/index.html` (visual & detailed)
+- **JSON Reports**: `coverage-summary.json` dan `coverage-final.json`
+- **Threshold**: 80% minimum (saat ini 92.8% ✅)
 
 ### Linting & Formatting
 
-- Jalankan lint: `yarn lint`
-- Format code: `yarn format`
+- **ESLint**: `yarn lint` - Code quality & best practices
+- **Prettier**: `yarn format` - Consistent code formatting
+- **Format Check**: `yarn format:check` - Verify formatting
 
 ### Pre-commit Hooks
 
-- Husky & lint-staged: otomatis lint, format, type-check, dan test sebelum commit
+- **Husky & lint-staged**: Otomatis lint, format, type-check, dan test sebelum commit
+- **Quality Gates**: Prettier + ESLint + Tests + TypeScript compilation
 
 ---
 
@@ -231,13 +241,6 @@ Kami sangat terbuka untuk kontribusi! Silakan baca [CONTRIBUTING.md](./CONTRIBUT
 - [ ] Analytics & monitoring
 - [ ] SEO tools
 - [ ] Internationalization (i18n)
-
-### ✅ Recently Completed
-
-- **API Endpoints**: `/api/health` untuk monitoring, `/api/user` dengan Clerk authentication
-- **Comprehensive Testing**: Unit tests (9 tests) + E2E tests (6 tests) dengan 100% coverage
-- **TypeScript Enhancement**: Strict mode, proper typing untuk E2E tests
-- **Code Quality**: ESLint, Prettier, pre-commit hooks dengan Husky
 
 ---
 
